@@ -1,5 +1,5 @@
 #!/bin/sh
-echo "D.R.A.G.O ALPHA 1.0.1"
+echo "D.R.A.G.O (Diagnóstico Rápido de Artefatos e Gerenciamento Operacional) ALPHA 1.0.1"
 echo "Aviso: O D.R.A.G.O foi feito para rodar em sistemas baseados no Alpine com repositorios APK e Internet funcionais. Considere usar este tipo apenas de sistema para um bom uso do programa."
 echo "Não use as opções 3, 4, 5 ou 6 no disco real sendo investigado, pois estas opções podem alterar timestamps, criar logs e etc. (a menos que você só esteja recuperando a senha do seu computador e nada mais)."
 while true; do
