@@ -1,0 +1,36 @@
+#!/bin/sh
+echo "D.R.A.G.O ALPHA 1.0.1"
+echo "Aviso: O D.R.A.G.O foi feito para rodar em sistemas baseados no Alpine com repositorios APK e Internet funcionais. Considere usar este tipo apenas de sistema para um bom uso do programa."
+echo "Não use as opções 3, 4, 5 ou 6 no disco real sendo investigado, pois estas opções podem alterar timestamps, criar logs e etc. (a menos que você só esteja recuperando a senha do seu computador e nada mais)."
+while true; do
+read -p "(1) Setup
+(2) Listar partições
+(3) Montar disco (cópia) em /mnt
+(4) Trocar senha de usuários
+(5) Acessar sistema do disco (apenas shell)
+(6) Escanear por arquivos apagados no disco
+(7) Desmontar o disco do /mnt
+(8) Montar disco (original) (read-only)
+" r
+if [[ "$r" = "1" ]]; then
+apk add testdisk lsblk
+lsblk
+read -p "Insira a partição em que está o disco: " disco
+elif [[ "$r" = "2" ]]; then
+lsblk
+elif [[ "$r" = "3" ]]; then
+mount /dev/$disco /mnt
+elif [[ "$r" = "4" ]]; then
+echo "Usuários: $(chroot /mnt /bin/sh -c 'ls /home') root"
+read -p "Usuário para a troca de senha: " user
+chroot /mnt /bin/sh -c "passwd $user"
+elif [[ "$r" = "5" ]]; then
+chroot /mnt
+elif [[ "$r" = "6" ]]; then
+photorec
+elif [[ "$r" = "7" ]]; then
+umount /mnt
+elif [[ "$r" = "8" ]]; then
+mount -o ro /dev/$disco /mnt
+fi
+done
